@@ -1,0 +1,23 @@
+server:
+  port: 8083
+
+hystrix:
+  command:
+    default:
+      execution:
+        isolation:
+          thread:
+            timeoutInMilliseconds: 20000
+
+zuul:
+  ignoredServices: '*'
+  host:
+    connect-timeout-millis: 20000
+    socket-timeout-millis: 20000
+
+  routes:
+    notes-service:
+        path: /notes/**
+        serviceId: notes-service
+        stripPrefix: false
+        sensitiveHeaders:
