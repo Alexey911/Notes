@@ -33,6 +33,24 @@ after_success:
   - docker tag $CONFIG:$COMMIT $CONFIG:$TAG
   - docker push $CONFIG
 
+  # REGISTRY SERVICE
+  - export REGISTRY=alexey777/notes-registry
+  - docker build -t $REGISTRY:$COMMIT ./registry
+  - docker tag $REGISTRY:$COMMIT $REGISTRY:$TAG
+  - docker push $REGISTRY
+
+  # NOTES SERVICE
+  - export NOTES_SERVICE=alexey777/notes-service
+  - docker build -t NOTES_SERVICE:$COMMIT ./notes-service
+  - docker tag NOTES_SERVICE:$COMMIT NOTES_SERVICE:$TAG
+  - docker push NOTES_SERVICE
+
+  # GATEWAY SERVICE
+  - export GATEWAY=alexey777/notes-gateway
+  - docker build -t $GATEWAY:$COMMIT ./gateway
+  - docker tag $GATEWAY:$COMMIT $GATEWAY:$TAG
+  - docker push $GATEWAY
+
 notifications:
     email:
       recipients:

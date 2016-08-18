@@ -1,12 +1,12 @@
 version: '2'
 services:
   config:
-    image: zhytnik/notes-config
+    image: alexey777/notes-config
     restart: always
     container_name: notes-config
 
   registry:
-    image: zhytnik/notes-registry
+    image: alexey777/notes-registry
     restart: always
     container_name: notes-registry
     ports:
@@ -15,7 +15,7 @@ services:
       - config
 
   gateway:
-    image: zhytnik/notes-gateway
+    image: alexey777/notes-gateway
     restart: always
     container_name: notes-gateway
     ports:
@@ -24,7 +24,7 @@ services:
       - notes-service
 
   notes-service:
-    image: zhytnik/notes-service
+    image: alexey777/notes-service
     restart: always
     container_name: notes-service
     links:
