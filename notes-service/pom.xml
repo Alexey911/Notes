@@ -48,7 +48,7 @@
                 <groupId>org.springframework.boot</groupId>
                 <artifactId>spring-boot-maven-plugin</artifactId>
                 <configuration>
-                    <finalName>service</finalName>
+                    <finalName>notes</finalName>
                 </configuration>
             </plugin>
         </plugins>
