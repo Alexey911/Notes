@@ -1,0 +1,2 @@
+[![Build Status](https://travis-ci.org/Alexey911/Notes.png?branch=master)](https://travis-ci.org/Alexey911/Notes)
+[![codecov.io](https://codecov.io/gh/Alexey911/Notes/coverage.svg?branch=master)](https://codecov.io/gh/Alexey911/Notes?branch=master)
