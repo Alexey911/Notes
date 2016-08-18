@@ -42,8 +42,8 @@ after_success:
   # NOTES SERVICE
   - export NOTES_SERVICE=alexey777/notes-service
   - docker build -t $NOTES_SERVICE:$COMMIT ./notes-service
-  - docker tag NOTES_SERVICE:$COMMIT NOTES_SERVICE:$TAG
-  - docker push NOTES_SERVICE
+  - docker tag $NOTES_SERVICE:$COMMIT $NOTES_SERVICE:$TAG
+  - docker push $NOTES_SERVICE
 
   # GATEWAY SERVICE
   - export GATEWAY=alexey777/notes-gateway
