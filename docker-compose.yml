@@ -1,0 +1,23 @@
+version: '2'
+services:
+  config:
+    image: zhytnik/notes-config
+    restart: always
+
+  registry:
+    image: zhytnik/notes-registry
+    restart: always
+    ports:
+      - 8761:8761
+    depends_on:
+      - config
+
+  gateway:
+    image: zhytnik/notes-gateway
+    restart: always
+    ports:
+      - 80:4000
+
+  notes-service:
+    image: zhytnik/notes-service
+    restart: always
