@@ -3,21 +3,29 @@ services:
   config:
     image: zhytnik/notes-config
     restart: always
+    container_name: notes-config
 
   registry:
     image: zhytnik/notes-registry
     restart: always
+    container_name: notes-registry
     ports:
       - 8761:8761
-    depends_on:
+    links:
       - config
 
   gateway:
     image: zhytnik/notes-gateway
     restart: always
+    container_name: notes-gateway
     ports:
       - 80:4000
+    links:
+      - notes-service
 
   notes-service:
     image: zhytnik/notes-service
     restart: always
+    container_name: notes-service
+    links:
+      - registry
