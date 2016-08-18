@@ -3,7 +3,10 @@ language: java
 jdk:
    - oraclejdk8
 
-sudo: false
+sudo: required
+
+services:
+  - docker
 
 install: true
 
@@ -17,6 +20,33 @@ script:
 
 after_success:
   - bash <(curl -s https://codecov.io/bash)
+  - docker login -u $DOCKER_USER -p $DOCKER_PASS
+  - export COMMIT=${TRAVIS_COMMIT::7}
+  - export TAG=`if [ "$TRAVIS_BRANCH" == "master" ]; then echo "latest"; else echo $TRAVIS_BRANCH ; fi`
+
+  # CONFIG SERVICE
+  - export CONFIG=zhytnik/notes-config
+  - docker build -t $CONFIG:$COMMIT ./config
+  - docker tag $CONFIG:$COMMIT $CONFIG:$TAG
+  - docker push $CONFIG
+
+  # REGISTRY SERVICE
+  - export CONFIG=zhytnik/notes-registry
+  - docker build -t $CONFIG:$COMMIT ./registry
+  - docker tag $CONFIG:$COMMIT $CONFIG:$TAG
+  - docker push $CONFIG
+
+  # NOTES SERVICE
+  - export CONFIG=zhytnik/notes-service
+  - docker build -t $CONFIG:$COMMIT ./notes-service
+  - docker tag $CONFIG:$COMMIT $CONFIG:$TAG
+  - docker push $CONFIG
+
+  # GATEWAY SERVICE
+  - export CONFIG=zhytnik/notes-gateway
+  - docker build -t $CONFIG:$COMMIT ./gateway
+  - docker tag $CONFIG:$COMMIT $CONFIG:$TAG
+  - docker push $CONFIG
 
 notifications:
     email:
